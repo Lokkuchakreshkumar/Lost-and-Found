@@ -4,15 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Login</h1>
-    <form id="login-form" action="/login" method="post">
-      <input type="text" name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" required />
       <button type="submit">Login</button>
     </form>
-    <p>Don't have an account? <a href="/signup">Sign up here</a>.</p>
+
+    <script>
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+          const user = users.find(
+            (user) => user.username === username && user.password === password
+          );
+
+          if (user) {
+            alert("Login successful!");
+            localStorage.setItem("loggedInUser", username);
+            window.location.href = "/"; // Redirect to the main page
+          } else {
+            alert(
+              "Invalid username or password. Please sign up if you do not have an account."
+            );
+          }
+        });
+    </script>
   </body>
 </html>

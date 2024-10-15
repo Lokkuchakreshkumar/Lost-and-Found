@@ -7,31 +7,35 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Found Item</h1>
-    <form id="found-form" action="/found-item" method="post">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="text" name="phone" placeholder="Phone Number" required />
-      <input
-        type="text"
-        name="alt_phone"
-        placeholder="Alternate Phone Number"
-      />
-      <input type="text" name="item_found" placeholder="Item Found" required />
-      <label for="describe-more">Would you like to describe more?</label>
-      <input
-        type="checkbox"
-        id="describe-more"
-        name="describe_more"
-        onclick="document.getElementById('more-info').style.display = this.checked ? 'block' : 'none';"
-      />
-      <div id="more-info" style="display: none">
-        <input type="text" name="location" placeholder="Location Found" />
-        <textarea
-          name="description"
-          placeholder="Description of Item"
-        ></textarea>
-      </div>
-      <button type="submit">Found</button>
-    </form>
+    <header>
+      <h1>Found an Item</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <form id="foundItemForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required />
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" required />
+
+        <label for="description">Details about the Found Item:</label>
+        <textarea id="description" required></textarea>
+
+        <label for="location">Location where the item was found:</label>
+        <input type="text" id="location" required />
+
+        <button type="submit">Report Found Item</button>
+      </form>
+    </main>
+
+    <script src="found-item.js"></script>
   </body>
 </html>
