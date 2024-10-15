@@ -3,16 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lost and Found</title>
     <link rel="stylesheet" href="styles.css" />
-    <title>Home</title>
   </head>
   <body>
-    <h1>Welcome to Lost and Found</h1>
-    <nav>
-      <a href="signup.html">Sign Up</a>
-      <a href="login.html">Login</a>
-      <a href="request-lost-item.html">Request Lost Item</a>
-      <a href="found-item.html">Found Item</a>
-    </nav>
+    <header>
+      <h1>Welcome to Lost and Found</h1>
+      <div class="button-container">
+        <button
+          id="signup-button"
+          class="button-netflix"
+          onclick="window.location.href='/signup'"
+        >
+          Sign Up
+        </button>
+        <button
+          id="login-button"
+          class="button-netflix"
+          onclick="window.location.href='/login'"
+        >
+          Login
+        </button>
+        <button
+          id="request-button"
+          class="button-netflix"
+          onclick="window.location.href='/request-lost-item'"
+        >
+          Request Lost Item
+        </button>
+        <button
+          id="found-button"
+          class="button-netflix"
+          onclick="window.location.href='/found-item'"
+        >
+          Found Item
+        </button>
+      </div>
+    </header>
   </body>
 </html>

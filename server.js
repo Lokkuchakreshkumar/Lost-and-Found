@@ -1,10 +1,11 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
-// Serve static files from the public directory
+// Middleware
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true })); // To handle form submissions
 
 // Define routes
 app.get('/', (req, res) => {
@@ -25,6 +26,29 @@ app.get('/request-lost-item', (req, res) => {
 
 app.get('/found-item', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'found-item.html'));
+});
+
+// Handle form submissions
+app.post('/signup', (req, res) => {
+    // Implement signup logic here
+    res.send('Signup successful!');
+});
+
+app.post('/login', (req, res) => {
+    // Implement login logic here
+    res.send('Login successful!');
+});
+
+app.post('/request-lost-item', (req, res) => {
+    // Handle the request logic
+    console.log(req.body);
+    res.send('Request for lost item submitted!');
+});
+
+app.post('/found-item', (req, res) => {
+    // Handle the found item logic
+    console.log(req.body);
+    res.send('Found item information submitted!');
 });
 
 // Start the server

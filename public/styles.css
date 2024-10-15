@@ -1,65 +1,43 @@
+/* Basic Reset */
 body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #141414; /* Dark background similar to Netflix */
-    color: white; /* White text for contrast */
-    text-align: center; /* Center text */
+    background-color: #f0f0f0;
 }
 
-h1 {
-    margin-top: 20px;
+/* Header styling */
+header {
+    text-align: center;
+    padding: 50px;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Space between buttons */
-    margin: 20px 0;
-}
-
-.button {
-    background-color: red; /* Button color similar to Netflix */
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: darkred; /* Darker shade on hover */
-}
-
-form {
-    max-width: 400px; /* Limit form width */
-    margin: auto; /* Center the form */
-    background-color: #222; /* Form background */
-    padding: 20px;
-    border-radius: 5px;
-}
-
-label {
-    display: block; /* Stack labels above inputs */
-    margin-top: 10px;
-}
-
-input, textarea, select {
-    width: 100%; /* Full-width inputs */
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #444; /* Border color */
-}
-
+/* General button styling */
 button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: red; /* Button color */
-    color: white;
+    padding: 15px 30px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    color: white;
+    transition: all 0.3s ease;
 }
 
-button:hover {
-    background-color: darkred; /* Darker shade on hover */
+/* Netflix style button */
+.button-netflix {
+    background-color: #e50914; /* Netflix red */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.button-netflix:hover {
+    background-color: #f40612; /* Darker red on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Specific styling for the home page buttons */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px;
 }

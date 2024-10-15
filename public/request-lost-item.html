@@ -8,44 +8,36 @@
   </head>
   <body>
     <h1>Request Lost Item</h1>
-    <form id="request-form">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="phone">Phone Number:</label>
-      <input type="tel" id="phone" name="phone" required />
-
-      <label for="alternate-phone">Alternate Phone Number:</label>
-      <input type="tel" id="alternate-phone" name="alternate-phone" />
-
-      <label for="category">Category:</label>
-      <select id="category" name="category">
+    <form id="request-form" action="/request-lost-item" method="post">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="text" name="phone" placeholder="Phone Number" required />
+      <input
+        type="text"
+        name="alt_phone"
+        placeholder="Alternate Phone Number"
+        required
+      />
+      <select name="category" required>
         <option value="electronic">Electronic</option>
         <option value="non-electronic">Non-Electronic</option>
       </select>
-
-      <label for="description">Description of Lost Item:</label>
-      <textarea id="description" name="description" required></textarea>
-
-      <label for="location">Location Lost:</label>
-      <input type="text" id="location" name="location" required />
-
-      <label for="imei">IMEI Number (if applicable):</label>
-      <input type="text" id="imei" name="imei" />
-
-      <label for="other-things">Other Things:</label>
-      <textarea id="other-things" name="other-things"></textarea>
-
+      <textarea
+        name="description"
+        placeholder="Describe Lost Item"
+        required
+      ></textarea>
+      <textarea
+        name="location"
+        placeholder="Location of Loss"
+        required
+      ></textarea>
+      <input
+        type="text"
+        name="imei"
+        placeholder="IMEI (for electronic items)"
+      />
+      <textarea name="other" placeholder="Other Details (optional)"></textarea>
       <button type="submit">Request</button>
     </form>
-    <p id="response-message"></p>
-
-    <script>
-      document.getElementById("request-form").onsubmit = function (event) {
-        event.preventDefault();
-        document.getElementById("response-message").innerText =
-          "We will try our best!";
-      };
-    </script>
   </body>
 </html>
