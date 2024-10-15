@@ -5,40 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lost and Found</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <header>
+    <div class="container">
       <h1>Welcome to Lost and Found</h1>
-      <div class="button-container">
-        <button
-          id="signup-button"
-          class="button-netflix"
-          onclick="window.location.href='/signup'"
-        >
-          Sign Up
-        </button>
-        <button
-          id="login-button"
-          class="button-netflix"
-          onclick="window.location.href='/login'"
-        >
-          Login
-        </button>
-        <button
-          id="request-button"
-          class="button-netflix"
-          onclick="window.location.href='/request-lost-item'"
-        >
-          Request Lost Item
-        </button>
-        <button
-          id="found-button"
-          class="button-netflix"
-          onclick="window.location.href='/found-item'"
-        >
-          Found Item
-        </button>
-      </div>
-    </header>
+      <button onclick="location.href='/signup'">Sign Up</button>
+      <button onclick="location.href='/login'">Login</button>
+      <button onclick="location.href='/request-lost-item'">
+        Request Lost Item
+      </button>
+      <button onclick="location.href='/found-item'">Found Item</button>
+
+      <h2>Lost Items</h2>
+      <div id="lost-items-container"></div>
+    </div>
+
+    <script>
+      // Fetch and display lost items
+      async function fetchLostItems() {
+        const response = await fetch("/lost-items");
+        const lostItems = await response.json();
+        const container = document.getElementById("lost-items-container");
+
+        container.innerHTML = ""; // Clear previous items
+
+        lostItems.forEach((item) => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "item";
+          itemDiv.innerHTML = `
+                    <h3>${item.description}</h3>
+                    <p>Location: ${item.location}</p>
+                    <p>If you have seen this item, report in Found Items.</p>
+                `;
+          container.appendChild(itemDiv);
+        });
+      }
+
+      fetchLostItems();
+    </script>
   </body>
 </html>

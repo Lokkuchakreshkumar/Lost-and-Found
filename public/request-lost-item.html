@@ -7,37 +7,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Request Lost Item</h1>
-    <form id="request-form" action="/request-lost-item" method="post">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="text" name="phone" placeholder="Phone Number" required />
-      <input
-        type="text"
-        name="alt_phone"
-        placeholder="Alternate Phone Number"
-        required
-      />
-      <select name="category" required>
-        <option value="electronic">Electronic</option>
-        <option value="non-electronic">Non-Electronic</option>
-      </select>
-      <textarea
-        name="description"
-        placeholder="Describe Lost Item"
-        required
-      ></textarea>
-      <textarea
-        name="location"
-        placeholder="Location of Loss"
-        required
-      ></textarea>
-      <input
-        type="text"
-        name="imei"
-        placeholder="IMEI (for electronic items)"
-      />
-      <textarea name="other" placeholder="Other Details (optional)"></textarea>
-      <button type="submit">Request</button>
-    </form>
+    <div class="container">
+      <h1>Request Lost Item</h1>
+      <form action="/request-lost-item" method="POST">
+        <label for="description">Item Description:</label>
+        <input type="text" id="description" name="description" required />
+
+        <label for="location">Location Lost:</label>
+        <input type="text" id="location" name="location" required />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </body>
 </html>
