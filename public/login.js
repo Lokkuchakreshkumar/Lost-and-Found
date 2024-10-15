@@ -1,14 +1,27 @@
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const storedPassword = localStorage.getItem(username);
-
-    if (storedPassword === password) {
-        window.location.href = 'request-lost-item.html'; // Redirect on successful login
-    } else {
-        document.getElementById('errorMessage').innerText = 'No account exists. Please sign up first.';
-    }
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Successful login; redirect to home page
+            window.location.href = '/';
+        } else {
+            // Show message to sign up
+            alert(data.message);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 });

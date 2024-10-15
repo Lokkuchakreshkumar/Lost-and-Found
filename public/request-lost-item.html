@@ -7,17 +7,53 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Request Lost Item</h1>
-      <form action="/request-lost-item" method="POST">
-        <label for="description">Item Description:</label>
-        <input type="text" id="description" name="description" required />
+    <h1>Request Lost Item</h1>
+    <form id="lost-item-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required />
 
-        <label for="location">Location Lost:</label>
-        <input type="text" id="location" name="location" required />
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone" required />
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+      <label for="description">Describe Lost Item:</label>
+      <input type="text" id="description" required />
+
+      <label for="location">Location Lost:</label>
+      <input type="text" id="location" required />
+
+      <button type="submit">Request</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("lost-item-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const phone = document.getElementById("phone").value;
+          const description = document.getElementById("description").value;
+          const location = document.getElementById("location").value;
+
+          // Assuming you have a way to send this data to your server
+          fetch("/submit-lost-item", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, phone, description, location }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                // Redirect to the home page after successful submission
+                window.location.href = "/";
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
   </body>
 </html>

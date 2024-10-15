@@ -1,10 +1,28 @@
-document.getElementById('signupForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Save user details to local storage
-    localStorage.setItem(username, password);
-    document.getElementById('signupMessage').innerText = 'Account created successfully! You can now login.';
+    fetch('/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Successful signup; redirect to login
+            alert('Signup successful! Please log in.');
+            window.location.href = '/login';
+        } else {
+            // Account already exists
+            alert(data.message);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 });
