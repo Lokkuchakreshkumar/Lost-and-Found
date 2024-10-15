@@ -1,22 +1,24 @@
-document.getElementById('lost-item-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.getElementById('lostItemForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
 
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
-    const alternatePhone = document.getElementById('alternate-phone').value;
-    const description = document.getElementById('description').value;
-    const location = document.getElementById('location').value;
+    const itemDescription = document.getElementById('itemDescription').value;
+    const locationLost = document.getElementById('locationLost').value;
 
-    fetch('/api/request-lost-item', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, phone, alternatePhone, description, location }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        window.location.href = '/'; // Redirect to main page
-    });
+    // Create a lost item object
+    const lostItem = {
+        name: name,
+        phone: phone,
+        description: itemDescription,
+        location: locationLost
+    };
+
+    // Save the lost item to local storage
+    let lostItems = JSON.parse(localStorage.getItem('lostItems')) || [];
+    lostItems.push(lostItem);
+    localStorage.setItem('lostItems', JSON.stringify(lostItems));
+
+    // Redirect back to the main page after submission
+    window.location.href = '/';
 });

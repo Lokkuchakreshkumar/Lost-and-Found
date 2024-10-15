@@ -3,48 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
     <title>Request Lost Item</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Request Lost Item</h1>
-
-    <form id="lost-item-form">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="text" id="phone" placeholder="Phone Number" required />
+    <form id="lostItemForm">
+      <input type="text" placeholder="Name" required id="name" />
+      <input type="text" placeholder="Phone Number" required id="phone" />
       <input
         type="text"
-        id="alternate-phone"
-        placeholder="Alternate Phone Number"
-      />
-      <select id="category">
-        <option value="electronic">Electronic</option>
-        <option value="non-electronic">Non-Electronic</option>
-      </select>
-      <input
-        type="text"
-        id="description"
         placeholder="Description of Lost Item"
         required
+        id="itemDescription"
       />
       <input
         type="text"
-        id="location"
-        placeholder="Location of Lost Item"
+        placeholder="Location Lost"
         required
+        id="locationLost"
       />
-      <input
-        type="text"
-        id="imei"
-        placeholder="IMEI for Electronic Items (if applicable)"
-      />
-      <textarea
-        id="other-things"
-        placeholder="Other things (optional)"
-      ></textarea>
       <button type="submit">Request</button>
     </form>
-
-    <script src="script.js"></script>
+    <script src="requestLostItem.js"></script>
   </body>
 </html>
