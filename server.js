@@ -7,6 +7,11 @@ const PORT = 5000;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true })); // To handle form submissions
 
+// Mock user database
+const users = [
+    { username: 'testuser', password: 'password123' } // Example user
+];
+
 // Define routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -35,8 +40,16 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    // Implement login logic here
-    res.send('Login successful!');
+    const { username, password } = req.body;
+    
+    // Check if the user exists
+    const user = users.find(user => user.username === username && user.password === password);
+    
+    if (user) {
+        res.send('Login successful!');
+    } else {
+        res.send('Invalid username or password. Please sign up if you do not have an account.');
+    }
 });
 
 app.post('/request-lost-item', (req, res) => {
