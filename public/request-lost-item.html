@@ -4,56 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Request Lost Item</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Request Lost Item</h1>
     <form id="lost-item-form">
-      <label for="name">Name:</label>
-      <input type="text" id="name" required />
-
-      <label for="phone">Phone Number:</label>
-      <input type="text" id="phone" required />
-
-      <label for="description">Describe Lost Item:</label>
+      <label for="description">Description:</label>
       <input type="text" id="description" required />
 
-      <label for="location">Location Lost:</label>
+      <label for="location">Location:</label>
       <input type="text" id="location" required />
 
-      <button type="submit">Request</button>
+      <button type="submit">Submit</button>
     </form>
-
-    <script>
-      document
-        .getElementById("lost-item-form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const name = document.getElementById("name").value;
-          const phone = document.getElementById("phone").value;
-          const description = document.getElementById("description").value;
-          const location = document.getElementById("location").value;
-
-          // Assuming you have a way to send this data to your server
-          fetch("/submit-lost-item", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name, phone, description, location }),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.success) {
-                // Redirect to the home page after successful submission
-                window.location.href = "/";
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-        });
-    </script>
+    <script src="request-lost-item.js"></script>
   </body>
 </html>

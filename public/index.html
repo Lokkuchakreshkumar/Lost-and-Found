@@ -7,23 +7,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Lost and Found</h1>
-      <div class="buttons">
-        <a href="/signup" class="button">Sign Up</a>
-        <a href="/login" class="button">Login</a>
-        <a href="/request-lost-item" class="button">Request Lost Item</a>
-        <a href="/found-item" class="button">Found Item</a>
-      </div>
+    <h1>Welcome to Lost and Found</h1>
+    <div class="button-container">
+      <a href="/signup" class="button">Sign Up</a>
+      <a href="/login" class="button">Login</a>
+      <a href="/request-lost-item" class="button">Request Lost Item</a>
+      <a href="/found-item" class="button">Found Item</a>
+    </div>
 
-      <h2>Lost Items</h2>
-      <div id="lost-items" class="lost-items">
-        <!-- Lost items will be displayed here -->
-      </div>
-
-      <div id="user-info">
-        <!-- User information will be displayed here -->
-      </div>
+    <h2>Lost Items</h2>
+    <div id="lost-items-container">
+      <div id="lost-items" class="scroll-container"></div>
     </div>
 
     <script src="script.js"></script>

@@ -3,28 +3,46 @@ const path = require('path');
 const app = express();
 const PORT = 5000;
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json()); // Middleware to parse JSON bodies
 
-let lostItems = []; // Array to store lost items
+// In-memory storage for lost and found items
+let lostItems = [];
+let foundItems = [];
 
 // Define routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.post('/submit-lost-item', (req, res) => {
-    const { name, phone, description, location } = req.body;
-    // Push the lost item information to the array
-    lostItems.push({ name, phone, description, location });
-    res.json({ success: true });
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Other routes (login, signup, etc.)
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'signup.html'));
+});
 
-// Endpoint to get lost items for the home page
-app.get('/lost-items', (req, res) => {
+app.get('/request-lost-item', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'request-lost-item.html'));
+});
+
+app.get('/found-item', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'found-item.html'));
+});
+
+// API endpoint to handle lost item requests
+app.post('/api/request-lost-item', (req, res) => {
+    const { description, location } = req.body;
+    lostItems.push({ description, location });
+    res.json({ success: true, message: 'Lost item request submitted!' });
+});
+
+// API endpoint to get lost items
+app.get('/api/lost-items', (req, res) => {
     res.json(lostItems);
 });
 
