@@ -7,24 +7,38 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Request Lost Item</h1>
-    <form id="lostItemForm">
-      <input type="text" placeholder="Name" required id="name" />
-      <input type="text" placeholder="Phone Number" required id="phone" />
-      <input
-        type="text"
-        placeholder="Description of Lost Item"
-        required
-        id="itemDescription"
-      />
-      <input
-        type="text"
-        placeholder="Location Lost"
-        required
-        id="locationLost"
-      />
-      <button type="submit">Request</button>
-    </form>
-    <script src="requestLostItem.js"></script>
+    <header>
+      <h1>Request Lost Item</h1>
+    </header>
+
+    <main>
+      <form id="request-lost-item-form">
+        <label for="description">Description:</label>
+        <input type="text" id="description" required />
+
+        <label for="location">Location Lost:</label>
+        <input type="text" id="location" required />
+
+        <button type="submit">Request</button>
+      </form>
+    </main>
+
+    <script>
+      document
+        .getElementById("request-lost-item-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+          const description = document.getElementById("description").value;
+          const location = document.getElementById("location").value;
+
+          // Call the function to add the lost item
+          addLostItem(description, location);
+
+          // Clear the form
+          this.reset();
+          alert("Lost item requested successfully!");
+          window.location.href = "index.html"; // Redirect to home page
+        });
+    </script>
   </body>
 </html>

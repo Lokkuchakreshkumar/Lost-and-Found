@@ -1,25 +1,26 @@
-// Initialize an array to store lost items
+// Array to store lost items
 let lostItems = [];
-
-// Function to load lost items from local storage
-function loadLostItems() {
-    const items = JSON.parse(localStorage.getItem('lostItems')) || [];
-    lostItems = items;
-    displayLostItems();
-}
 
 // Function to display lost items
 function displayLostItems() {
-    const container = document.getElementById('lostItemsContainer');
-    container.innerHTML = ''; // Clear previous items
+    const lostItemsContainer = document.getElementById("lost-items");
+    lostItemsContainer.innerHTML = ''; // Clear previous items
 
     lostItems.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('lost-item');
-        itemDiv.innerHTML = `<strong>${item.description}</strong><br>Location: ${item.location}<br>`;
-        container.appendChild(itemDiv);
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("lost-item");
+        itemDiv.innerHTML = `<p><strong>Description:</strong> ${item.description}</p>
+                             <p><strong>Location:</strong> ${item.location}</p>`;
+        lostItemsContainer.appendChild(itemDiv);
     });
 }
 
-// Load lost items on page load
-window.onload = loadLostItems;
+// Call displayLostItems to show items on page load
+displayLostItems();
+
+// Function to add lost item (this should be called when the request form is submitted)
+function addLostItem(description, location) {
+    const newItem = { description, location };
+    lostItems.push(newItem);
+    displayLostItems();
+}
