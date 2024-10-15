@@ -1,18 +1,17 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 5000;
 
 // Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true })); // To handle form submissions
 
-// Mock user database
-const users = [
-    { username: 'testuser', password: 'password123' } // Example user
-];
+// Sample user data storage (you should implement a database for production)
+let users = [];
 
-// Define routes
+// Serve static files from the public directory
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -33,45 +32,35 @@ app.get('/found-item', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'found-item.html'));
 });
 
-// Handle form submissions
+// Signup route
 app.post('/signup', (req, res) => {
     const { username, password } = req.body;
 
     // Check if the user already exists
-    const userExists = users.some(user => user.username === username);
-
+    const userExists = users.find(user => user.username === username);
+    
     if (userExists) {
         return res.send('Account already exists. Please log in.');
     }
 
-    // If user does not exist, add to the users array
+    // Add new user to the users array
     users.push({ username, password });
-    res.send('Signup successful!');
+    return res.send('Sign up successful! You can now log in.');
 });
 
+// Login route
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    
+
     // Check if the user exists
     const user = users.find(user => user.username === username && user.password === password);
-    
+
     if (user) {
-        res.send('Login successful!');
+        // Redirect to the main page with the username as a query parameter
+        return res.redirect(`/?username=${username}`);
     } else {
-        res.send('Invalid username or password. Please sign up if you do not have an account.');
+        return res.send('Invalid username or password. Please sign up if you do not have an account.');
     }
-});
-
-app.post('/request-lost-item', (req, res) => {
-    // Handle the request logic
-    console.log(req.body);
-    res.send('Request for lost item submitted!');
-});
-
-app.post('/found-item', (req, res) => {
-    // Handle the found item logic
-    console.log(req.body);
-    res.send('Found item information submitted!');
 });
 
 // Start the server
