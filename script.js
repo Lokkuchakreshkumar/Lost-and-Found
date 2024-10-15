@@ -1,25 +1,37 @@
-// Fetch and display lost items on the homepage
+// Add your existing JavaScript functionality here
+
+document.getElementById("lost-item-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const description = document.getElementById("description").value;
+    const location = document.getElementById("location").value;
+
+    // Simulating an API call to store the lost item
+    const lostItem = { name, phone, description, location };
+    localStorage.setItem("lostItem", JSON.stringify(lostItem));
+
+    alert("Lost item requested successfully!");
+    window.location.href = "/"; // Redirect to homepage
+});
+
+// Function to display lost items
 function displayLostItems() {
-    fetch('/api/lost-items')
-        .then(response => response.json())
-        .then(data => {
-            const lostItemsContainer = document.getElementById('lost-items');
-            lostItemsContainer.innerHTML = ''; // Clear existing items
-            data.forEach(item => {
-                const itemElement = document.createElement('div');
-                itemElement.className = 'lost-item';
-                itemElement.innerHTML = `
-                    <strong>Name:</strong> ${item.name}<br>
-                    <strong>Phone:</strong> ${item.phone}<br>
-                    <strong>Alternate Phone:</strong> ${item.alternatePhone}<br>
-                    <strong>Description:</strong> ${item.description}<br>
-                    <strong>Location:</strong> ${item.location}<br>
-                    <strong>Status:</strong> Lost
-                `;
-                lostItemsContainer.appendChild(itemElement);
-            });
-        });
+    const lostItemsContainer = document.getElementById("lost-items");
+    const lostItem = JSON.parse(localStorage.getItem("lostItem"));
+
+    if (lostItem) {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "lost-item";
+        itemDiv.innerHTML = `
+            <strong>${lostItem.description}</strong><br>
+            Location: ${lostItem.location}<br>
+            Contact: ${lostItem.phone}<br>
+            <button onclick="reportFound('${lostItem.description}')">Report Found</button>
+        `;
+        lostItemsContainer.appendChild(itemDiv);
+    }
 }
 
-// Call the function to display items
-document.addEventListener('DOMContentLoaded', displayLostItems);
+window.onload = displayLostItems;

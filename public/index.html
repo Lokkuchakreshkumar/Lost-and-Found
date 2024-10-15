@@ -3,22 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lost and Found</title>
     <link rel="stylesheet" href="styles.css" />
+    <title>Lost and Found</title>
   </head>
   <body>
-    <h1>Welcome to Lost and Found</h1>
-    <div class="button-container">
-      <a href="/signup" class="button">Sign Up</a>
-      <a href="/login" class="button">Login</a>
-      <a href="/request-lost-item" class="button">Request Lost Item</a>
-      <a href="/found-item" class="button">Found Item</a>
-    </div>
+    <h1>Lost and Found</h1>
+
+    <!-- Buttons for existing functionalities -->
+    <button onclick="window.location.href='/request-lost-item.html'">
+      Request Lost Item
+    </button>
+    <button onclick="window.location.href='/found-item.html'">
+      Found an Item
+    </button>
+    <button onclick="window.location.href='/login.html'">Login</button>
+    <button onclick="window.location.href='/signup.html'">Sign Up</button>
 
     <h2>Lost Items</h2>
-    <div id="lost-items-container">
-      <div id="lost-items" class="scroll-container"></div>
-    </div>
+    <div id="lost-items" class="lost-items-container"></div>
 
     <script src="script.js"></script>
   </body>
