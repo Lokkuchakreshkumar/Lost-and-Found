@@ -35,7 +35,17 @@ app.get('/found-item', (req, res) => {
 
 // Handle form submissions
 app.post('/signup', (req, res) => {
-    // Implement signup logic here
+    const { username, password } = req.body;
+
+    // Check if the user already exists
+    const userExists = users.some(user => user.username === username);
+
+    if (userExists) {
+        return res.send('Account already exists. Please log in.');
+    }
+
+    // If user does not exist, add to the users array
+    users.push({ username, password });
     res.send('Signup successful!');
 });
 
