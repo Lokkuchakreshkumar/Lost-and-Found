@@ -8,7 +8,14 @@ function displayLostItems() {
             data.forEach(item => {
                 const itemElement = document.createElement('div');
                 itemElement.className = 'lost-item';
-                itemElement.innerHTML = `<strong>Description:</strong> ${item.description}<br><strong>Location:</strong> ${item.location}`;
+                itemElement.innerHTML = `
+                    <strong>Name:</strong> ${item.name}<br>
+                    <strong>Phone:</strong> ${item.phone}<br>
+                    <strong>Alternate Phone:</strong> ${item.alternatePhone}<br>
+                    <strong>Description:</strong> ${item.description}<br>
+                    <strong>Location:</strong> ${item.location}<br>
+                    <strong>Status:</strong> Lost
+                `;
                 lostItemsContainer.appendChild(itemElement);
             });
         });
