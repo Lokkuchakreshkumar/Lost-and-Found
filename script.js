@@ -1,6 +1,4 @@
-// Add your existing JavaScript functionality here
-
-document.getElementById("lost-item-form").addEventListener("submit", function(event) {
+document.getElementById("lost-item-form")?.addEventListener("submit", function(event) {
     event.preventDefault();
 
     const name = document.getElementById("name").value;
@@ -8,30 +6,36 @@ document.getElementById("lost-item-form").addEventListener("submit", function(ev
     const description = document.getElementById("description").value;
     const location = document.getElementById("location").value;
 
-    // Simulating an API call to store the lost item
+    // Create a lost item object
     const lostItem = { name, phone, description, location };
-    localStorage.setItem("lostItem", JSON.stringify(lostItem));
+
+    // Retrieve existing lost items from localStorage
+    const existingItems = JSON.parse(localStorage.getItem("lostItems")) || [];
+    existingItems.push(lostItem);
+
+    // Store updated lost items back to localStorage
+    localStorage.setItem("lostItems", JSON.stringify(existingItems));
 
     alert("Lost item requested successfully!");
     window.location.href = "/"; // Redirect to homepage
 });
 
-// Function to display lost items
+// Function to display lost items on the homepage
 function displayLostItems() {
     const lostItemsContainer = document.getElementById("lost-items");
-    const lostItem = JSON.parse(localStorage.getItem("lostItem"));
+    const lostItems = JSON.parse(localStorage.getItem("lostItems")) || [];
 
-    if (lostItem) {
+    lostItems.forEach(item => {
         const itemDiv = document.createElement("div");
         itemDiv.className = "lost-item";
         itemDiv.innerHTML = `
-            <strong>${lostItem.description}</strong><br>
-            Location: ${lostItem.location}<br>
-            Contact: ${lostItem.phone}<br>
-            <button onclick="reportFound('${lostItem.description}')">Report Found</button>
+            <strong>${item.description}</strong><br>
+            Location: ${item.location}<br>
+            Contact: ${item.phone}<br>
         `;
         lostItemsContainer.appendChild(itemDiv);
-    }
+    });
 }
 
+// Call the display function on page load
 window.onload = displayLostItems;
